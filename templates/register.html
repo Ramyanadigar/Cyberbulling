@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="/static/style.css" rel="stylesheet" />
+    <link href="/static/style2.css" rel="stylesheet" />
+    <link rel="stylesheet" href="static/css/fontawsom-all.min.css" />
+
+    <title>CyberBullying | Register</title>
+    <style type="text/css">
+      /* Styles for form and body */
+      body {
+        background-image: url("/static/images/bg2.jpeg");
+        backdrop-filter: blur(2px);
+        background-size: cover;
+        height: 100%;
+        margin: 0; /* Reset default margin */
+        padding: 0; /* Reset default padding */
+      }
+
+      .prjt_title {
+        font-size: 30px;
+        font-weight: bold;
+        font-family: Arial Black;
+
+        background-image: linear-gradient(
+          to right,
+          #494448,
+          #3c393d,
+          #302f32,
+          #252527,
+          #1b1b1c,
+          #1b1b1c,
+          #1b1b1c,
+          #1b1b1c,
+          #252527,
+          #302f32,
+          #3c393d,
+          #494448
+        );
+        -webkit-background-clip: text; /* For Safari */
+        background-clip: text;
+        color: transparent;
+      }
+
+      .prjt_title:hover {
+        background-image: linear-gradient(
+          to right,
+          #0c0c0c,
+          #181819,
+          #222223,
+          #2d2c2e,
+          #393639,
+          #393639,
+          #393639,
+          #393639,
+          #2d2c2e,
+          #222223,
+          #181819,
+          #0c0c0c
+        );
+        -webkit-background-clip: text; /* For Safari */
+        background-clip: text;
+        color: transparent;
+      }
+
+      form {
+        width: 70%;
+        margin: auto;
+        padding: 1%;
+        margin-top: 4%;
+        border-radius: 16px;
+        box-shadow: 1px 1px 1px 1px #000;
+        backdrop-filter: blur(80px);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+
+        background: rgba(255, 255, 255, 0.47);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(11.4px);
+        -webkit-backdrop-filter: blur(11.4px);
+        border: 1px solid rgba(255, 255, 255, 0.58);
+      }
+
+      /* Styles for left and right sides */
+      .outer-div {
+        display: flex;
+      }
+
+      .left-side,
+      .right-side {
+        flex: 1;
+        padding: 10px; /* Add padding for better visibility */
+      }
+
+      .left-side {
+        background-image: url("/static/images/image2.png");
+        background-size: cover;
+        height: 300px;
+        color: rgb(0, 0, 0); /* Text color for better visibility */
+      }
+
+      .right-side {
+        /* background-color: rgb(247, 248, 249); Example background color for the right side */
+        backdrop-filter: blur(0px);
+      }
+      .separator {
+        width: 1px; /* Adjust the width of the line */
+        background-color: rgb(215, 213, 213); /* Color of the line */
+      }
+      #demo {
+        font-weight: 640;
+        font-size: 13px;
+        padding-top: 2%;
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="tuber">
+      <h1 class="prjt_title">CYBER BULLYING</h1>
+    </div>
+    <form action="/register" method="post">
+      <div>
+        <!-- <p class="para">Login Form</p> -->
+        <div class="outer-div">
+          <div class="left-side"></div>
+          <div class="separator"></div>
+          <div class="right-side">
+            <p class="title">REGISTRATION</p>
+            <h7 style="margin-left: 108px">{{ msg }}</h7>
+
+            <div class="input-field">
+              <input required="" class="input" type="text" name="a_name" />
+              <label class="label" for="input">Name</label>
+            </div>
+            <div class="input-field">
+              <div class="input-field" style="margin-top: 2%">
+                <input
+                  required=""
+                  class="input"
+                  type="text"
+                  id="Input"
+                  name="a_email"
+                />
+                <label class="label" for="input">Enter Email Address</label>
+              </div>
+              <p id="demo"></p>
+
+              <div class="input-field">
+                <input
+                  required=""
+                  class="input"
+                  type="password"
+                  name="a_password"
+                  id="showpsd"
+                />
+                <label class="label" for="input">Enter Password</label>
+                <div style="margin-left: 2%; margin-top: 2%; font-size: 13px">
+                  <input type="checkbox" onclick="psdFun()" />Show Password
+                </div>
+              </div>
+              <div>
+                <div style="margin-left: 40%; margin-top: 2%">
+                  <button class="button-70" role="button">Register</button>
+                  <!-- HTML !-->
+                </div>
+              </div>
+              <div style="font-size: 0.8rem; margin-top: 2.5%">
+                <p>Already have an Account ? <a href="/login">Sign In</a></p>
+              </div>
+              <!-- </form> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </body>
+  <script>
+    function psdFun() {
+      var x = document.getElementById("showpsd");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+
+    function validateInput() {
+      let x = document.getElementById("Input").value;
+      let text = "";
+
+      let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailRegex.test(x)) {
+        text = "*Please enter a valid Email*";
+      }
+      document.getElementById("demo").innerHTML = text;
+    }
+    document.getElementById("Input").addEventListener("input", validateInput);
+  </script>
+</html>

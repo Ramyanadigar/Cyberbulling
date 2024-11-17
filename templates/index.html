@@ -1,0 +1,386 @@
+{% extends "base.html" %} {% block title %} Cyberbullying | HomePage {% endblock
+%} {% block content %}
+
+<style>
+  body {
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+  }
+  .home_page {
+    width: 100%;
+    height: 86vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+  .form_title {
+    text-align: center;
+    margin: 20px 0;
+    color: white;
+  }
+
+  /* Style for form container */
+  form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+    background: rgba(255, 255, 255, 0.47);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(11.4px);
+    -webkit-backdrop-filter: blur(11.4px);
+    border: 1px solid rgba(255, 255, 255, 0.58);
+  }
+
+  /* Style for labels */
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  /* Style for input fields */
+  input[type="text"],
+  input[type="email"],
+  input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+
+  /* Select file */
+
+  /* Style for custom file input container */
+  .file-input-container {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    background-color: orange;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  /* Style for file input element */
+  .file-input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  label {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  #download-button {
+    width: 100%;
+    font-weight: bold;
+    margin-top: 5px;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  /* Loader */
+
+  .loader {
+    font-size: 48px;
+    display: inline-block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #ff3d00;
+    letter-spacing: 2px;
+    position: relative;
+    margin: auto;
+  }
+  .loader::after {
+    content: "Loading";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    animation: animloader 10s ease-in infinite;
+  }
+
+  @keyframes animloader {
+    0% {
+      width: 0%;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+
+  .map-container,
+  .input_table,
+  .result_table {
+    margin: 20px auto;
+    width: 90%;
+  }
+
+  /* table */
+
+  .table-center {
+    width: 100%; /* Adjusted to 90% */
+    margin: 20px auto; /* Center the table */
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+  }
+
+  .table-center th,
+  .table-center td {
+    border: 1px solid #e0e0e0;
+    padding: 12px 15px;
+    text-align: left;
+  }
+
+  .table-center th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+  }
+
+  .table_title {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 1.5em;
+  }
+
+  .input_table,
+  .result_table {
+    margin-bottom: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Hover effect for table rows */
+  .table-center tr:hover {
+    background-color: #f5f5f5;
+  }
+
+  /* For buttons */
+
+  .map-container,
+  .input_table,
+  .result_table {
+    display: none;
+  }
+
+  .data-sections {
+    text-align: center;
+    margin-top: 30px;
+  }
+</style>
+<body>
+  <div class="home_page">
+    <h3 class="form_title">HOME PAGE</h3>
+    <form
+      action="/submit"
+      method="post"
+      id="form_load"
+      enctype="multipart/form-data"
+    >
+      <div class="file-input-container">
+        <label for="option">Select file</label>
+        <input type="file" name="option" required class="file-input" />
+      </div>
+      <br /><br />
+      <button type="submit" id="download-button" class="btn">Send File</button>
+    </form>
+
+    <div
+      id="load"
+      style="display: none; text-align: center; margin-top: 10px; color: white"
+    >
+      <span class="loader">Loading</span>
+    </div>
+
+    {% if pr %}
+
+    <div class="data-sections">
+      <button
+        id="map-button"
+        class="btn"
+        onclick="toggleSection('map-container', 'map-button')"
+      >
+        SHOW MAP
+      </button>
+      <button
+        id="input-button"
+        class="btn"
+        onclick="toggleSection('input-table', 'input-button')"
+      >
+        SHOW INPUT
+      </button>
+      <button
+        id="output-button"
+        class="btn"
+        onclick="toggleSection('result-table', 'output-button')"
+      >
+        SHOW OUTPUT
+      </button>
+    </div>
+
+    <div class="map-container" id="map-container">
+      <h2 class="table_title" style="color: blue">Location Map</h2>
+      {{ pr|safe }}
+    </div>
+
+    <div class="input_table" id="input-table">
+      <h2 class="table_title" style="color: black">{{ i_t }}</h2>
+      <table class="table table-center">
+        {% if i_cols %}
+        <thead>
+          <tr>
+            {% for col in i_cols %}
+            <th>{{ col }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for value in i_values %}
+          <tr>
+            {% for i in value %}
+            <td>{{ i }}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </tbody>
+        {% endif %}
+      </table>
+    </div>
+
+    <div class="result_table" id="result-table">
+      <h2 class="table_title" style="color: green">{{ r_t }}</h2>
+      <table class="table table-center">
+        {% if r_cols %}
+        <thead>
+          <tr>
+            {% for col in r_cols %}
+            <th>{{ col }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for value in r_values %}
+          <tr>
+            {% for i in value %}
+            <td>{{ i }}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </tbody>
+        {% endif %}
+      </table>
+    </div>
+    {% endif %}
+  </div>
+
+  <p
+    id="msg"
+    class="hidden"
+    style="text-align: center; color: green; font-weight: bold"
+  >
+    {{ msg }}
+  </p>
+
+  <script>
+    function predict() {
+      document.getElementById("form_load").action = "/predict"; // Set form action to '/predict'
+      document.getElementById("form_load").submit(); // Submit the form
+    }
+  </script>
+
+  <script>
+    // JavaScript to handle form submission event
+    document
+      .querySelector("#form_load")
+      .addEventListener("submit", function (event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+
+        // Show loader when the form is submitted
+        let loader = document.querySelector("#load");
+        loader.style.display = "block";
+
+        // Submit the form programmatically after showing the loader
+        // This ensures that the loader is displayed before the form submission
+        document.querySelector("#form_load").submit();
+      });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var msgElement = document.getElementById("msg");
+      if (msgElement) {
+        // Show the message
+        msgElement.classList.remove("hidden");
+
+        // Set a timeout to hide the message after 10 seconds
+        setTimeout(function () {
+          msgElement.classList.add("hidden");
+        }, 10000); // 10 seconds in milliseconds
+      }
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const fileInput = document.querySelector('input[type="file"]');
+      const label = document.querySelector('label[for="option"]');
+
+      fileInput.addEventListener("change", function () {
+        if (this.files.length > 0) {
+          label.textContent = this.files[0].name; // Update label text with the selected file name
+        } else {
+          label.textContent = "Select file"; // Reset label text if no file is selected
+        }
+      });
+    });
+  </script>
+
+  <!-- For buttons -->
+
+  <script>
+    // Function to toggle section visibility and change button text
+    function toggleSection(sectionId, buttonId) {
+      var section = document.getElementById(sectionId);
+      var button = document.getElementById(buttonId);
+
+      // Get the computed style of the section
+      var sectionDisplay = window
+        .getComputedStyle(section)
+        .getPropertyValue("display");
+
+      if (sectionDisplay === "none") {
+        section.style.display = "block";
+        button.textContent = "HIDE " + buttonId.split("-")[0].toUpperCase();
+      } else {
+        section.style.display = "none";
+        button.textContent = "SHOW " + buttonId.split("-")[0].toUpperCase();
+      }
+    }
+  </script>
+</body>
+{% endblock %}

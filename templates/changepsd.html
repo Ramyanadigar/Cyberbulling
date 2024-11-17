@@ -1,0 +1,146 @@
+{% extends "base.html" %} {% block title %} CyberBullying | ChangePassowrd {% endblock %} 
+{% block content %}
+<style>
+  body {
+    background-size: cover;
+    height: 100%;
+    margin: 0; /* Reset default margin */
+    padding: 0; /* Reset default padding */
+  }
+
+  form {
+    width: 70%;
+    margin: auto;
+    padding: 1%;
+    margin-top: 1.5%;
+    border-radius: 16px;
+    box-shadow: 1px 1px 1px 1px #000;
+    backdrop-filter: blur(80px);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: rgba(255, 255, 255, 0.47);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(11.4px);
+    -webkit-backdrop-filter: blur(11.4px);
+    border: 1px solid rgba(255, 255, 255, 0.58);
+  }
+
+  .outer-div {
+    display: flex;
+  }
+
+  .left-side,
+  .right-side {
+    flex: 1;
+    padding: 10px; /* Add padding for better visibility */
+  }
+
+  .left-side {
+    background-image: url('/static/images/image2.png');
+    background-size: cover;
+    height: 430px;
+    color: rgb(0, 0, 0); /* Text color for better visibility */
+  }
+
+  .right-side {
+    backdrop-filter: blur(0px);
+  }
+  .separator {
+    width: 1px; /* Adjust the width of the line */
+    background-color: rgb(215, 213, 213); /* Color of the line */
+  }
+  h5{
+    font-size: .8rem;
+  }
+</style>
+
+<form action="/password" method="post"> 
+    <div>
+      <div>
+        <!-- <p class="para">Login Form</p> -->
+        <h7 style="margin-left: 138px;">{{ msg }}</h7>
+        <div class="outer-div">
+          <div class="left-side"> </div>
+          <div class="separator"></div> 
+          <div class="right-side">
+            <p class="title">CHANGE PASSWORD </p>
+        <center>
+            <h5 >{{msg1}}</h5>
+            <h5 >{{msg2}}</h5>
+            <h5 >{{msg3}}</h5></center>
+
+            <div class="input-field">
+              <input required class="input" type="text" id="Input" name="a_email" />
+              <label class="label" for="input">Enter Email</label>
+            </div>
+            <p id ="demo"></p>
+
+            <div class="input-field">
+              <input required="" class="input" type="password" name="currentpsd" id="showpsd" />
+              <label class="label" for="input">Current Password</label>
+                <div style="margin-left: 2%; margin-top: 2%; font-size: 13px;" >
+                  <input type="checkbox" onclick="psdFun()">Show Password
+                </div>
+            </div>
+
+            <div class="input-field">
+              <input required="" class="input" type="password" name="newpsd" id="showpsd1" />
+              <label class="label" for="input">Create New Password</label>
+                <div style="margin-left: 2%; margin-top: 2%; font-size: 13px;" >
+                  <input type="checkbox" onclick="psdFun1()">Show Password
+                </div>
+            </div>
+
+            <div class="input-field">
+              <input required="" class="input" type="password" name="reenterpsd" id="showpsd2" />
+              <label class="label" for="input">Confirm New Password</label>
+                <div style="margin-left: 2%; margin-top: 2%; font-size: 13px;" >
+                  <input type="checkbox" onclick="psdFun2()">Show Password
+                </div>
+            </div>
+
+        <button class="button-70" style="padding: 0%;" type="submit">Submit</button>
+
+    </div>
+  </form>
+<script>
+  function psdFun(){
+      var x = document.getElementById("showpsd")
+      if (x.type === "password"){
+          x.type = "text";
+      }else{
+          x.type = "password";
+      }
+  }
+  function psdFun1(){
+      var x = document.getElementById("showpsd1")
+      if (x.type === "password"){
+          x.type = "text";
+      }else{
+          x.type = "password";
+      }
+  }
+  function psdFun2(){
+      var x = document.getElementById("showpsd2")
+      if (x.type === "password"){
+          x.type = "text";
+      }else{
+          x.type = "password";
+      }
+  }
+
+  function validateInput() {
+    let x = document.getElementById("Input").value;
+    let text = "";
+
+    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(x)) {
+      text = "*Please enter a valid Email*";
+    }
+    document.getElementById("demo").innerHTML = text;
+  }
+  document.getElementById("Input").addEventListener("input", validateInput);
+
+</script>
+{% endblock %}

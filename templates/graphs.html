@@ -1,0 +1,134 @@
+{% extends 'base.html' %} {% block title %} CyberBullying | Graphs {% endblock
+%} {% block content %}
+
+<style>
+  body {
+    width: 100%;
+
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+    backdrop-filter: blur(2px);
+  }
+
+  .form-graphs-container {
+    height: 86vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .form-horizontal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+
+    margin-top: 2%;
+    border-radius: 10px;
+    padding: 1% 5%;
+
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(12.1px);
+    -webkit-backdrop-filter: blur(12.1px);
+
+    border-bottom: 3px solid white;
+    border-left: 3px solid white;
+  }
+
+  .control-label {
+    color: black;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  #country-state {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  .predict {
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  .graph-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+  }
+
+  .graph-container h4 {
+    color: blue;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .graph-container img {
+    width: 80%;
+    height: 80vh;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+</style>
+
+<body>
+  <div class="form-graphs-container">
+    <div class="form-container">
+      <form
+        class="form-horizontal"
+        action="/graph"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <label class="control-label"><strong>Select the Graph</strong></label>
+        <select id="country-state" name="text">
+          <option value="">Select Grpahs</option>
+
+          <option value=""></option>
+
+          <option value="c_ac">CNN Accuracy Plot Graph</option>
+          <option value="c_ls">CNN Loss Plot Graph</option>
+          <option value="c_cr">CNN Classification Report</option>
+          <option value="c_cm">CNN Confusion Matrix</option>
+        </select>
+
+        <button type="submit" id="download-button" class="btn">
+          Send File
+        </button>
+      </form>
+    </div>
+
+    <h5 style="text-align: center">{{ msg }}</h5>
+
+    {% if graph %}
+    <div class="graph-container">
+      <h2 style="color: blue; font-weight: bold">{{ mn }}</h2>
+      <h4>{{ name }}</h4>
+      <img src="{{ graph }}" />
+    </div>
+  </div>
+  {% endif %} {% endblock %}
+</body>

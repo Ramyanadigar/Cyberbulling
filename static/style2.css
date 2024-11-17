@@ -1,0 +1,171 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.outer-div {
+    width: 100%; /* or specify a fixed width */
+}
+  
+  .inner-div {
+    display: flex;
+}
+  
+  .left-side {
+    flex: 1; /* This makes left side take up all available space */
+
+    height: 200px;
+    background-image: url(static/images/image1.jpg);
+    background-size: cover; /* Optional: Adjusts the background image to cover the entire div */
+    color: rgb(0, 0, 0); /* Optional: Sets text color to white for better visibility */
+}
+  
+  .right-side {
+    flex: 1; /* This makes right side take up all available space */
+}
+  
+.form-control {
+    margin: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    padding: 25px;
+    border-radius: 8px;
+  }
+  .title {
+    font-size: 17px;
+    text-align: center;
+    font-weight: 800;
+  }
+  .input-field {
+    position: relative;
+    width: 100%;
+  }
+  
+  .input {
+    margin-top: 15px;
+    width: 100%;
+    outline: none;
+    border-radius: 8px;
+    height: 45px;
+    border: 1.5px solid #ecedec;
+    background: transparent;
+    padding-left: 10px;
+  }
+  .input:focus {
+    border: 1.5px solid #2d79f3;
+  }
+  .input-field .label {
+    position: absolute;
+    top: 25px;
+    left: 15px;
+    font-size: .85rem;
+    color: #080606;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .input-field .input:focus ~ .label,
+  .input-field .input:valid ~ .label {
+    top: 5px;
+    left: 5px;
+    font-size: .85rem;
+    font-weight: bold;
+    border-radius: 7px;
+    color: #2d79f3;
+    background-color: #d2d5f3;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .submit-btn {
+    margin-top: 30px;
+    width: 120px;
+    height: 35px;
+    background: #f2f2f2;
+    border-radius: 11px;
+    border: 0;
+    outline: none;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+    background: linear-gradient(180deg, #363636 0%, #1b1b1b 50%, #000000 100%);
+    box-shadow: 0px 0px 0px 0px #ffffff, 0px 0px 0px 0px #000000;
+    transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+    cursor: pointer;
+  }
+  
+  .submit-btn:hover {
+    box-shadow: 0px 0px 0px 2px #ffffff, 0px 0px 0px 4px #0000003a;
+  }
+  
+
+  
+
+  .button-70 {
+    background-image: linear-gradient(#1a899a, #0b54ac);
+    border: 0;
+    width: 7rem;
+    height: 2rem;
+    /* margin-left: 20%; */
+
+    border-radius: 15px;
+    box-shadow: rgba(122, 121, 121, 0.6) 0 3px 3px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    font-family: Montserrat,sans-serif;
+    font-size: .7em;
+    margin: 5px;
+    padding: 10px 15px;
+    text-align: center;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  } 
+
+
+
+.button-81 {
+    background-color: #fff;
+    border: 0 solid #e2e8f0;
+    border-radius: 1.5rem;
+    height: 2rem;
+    width: 7rem;
+    margin-left: 2%;
+    box-sizing: border-box;
+    color: #0d172a;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Basier circle",-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: .7em;
+    font-weight: 600;
+    line-height: 1;
+    /* padding: 1rem 1rem; */
+    text-align: center;
+    text-decoration: none #8f9092 solid;
+    text-decoration-thickness: auto;
+    transition: all .1s cubic-bezier(.4, 0, .2, 1);
+    box-shadow: 0px 2px 3px rgba(21, 20, 20, 0.25);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.button-81:hover {
+  background-color: #83838352;
+  color: #000000;
+}
+
+@media (min-width: 768px) {
+  .button-81 {
+    font-size: .7em;
+    /* padding: 1rem 1rem; */
+  }
+}
+
